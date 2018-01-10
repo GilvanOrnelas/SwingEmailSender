@@ -7,16 +7,13 @@ import javax.mail.internet.AddressException;
 
 import org.junit.Test;
 
-import com.goff.email_desktop.email.EmailProvider;
-
 public class EmailTest {
 
     @Test
-    public void test() throws AddressException, MessagingException, GeneralSecurityException {
-    	Email email = new Email();
-    	email.setAttachment("C:/Users/Gil/Desktop/backup.txt");
-    	email.setDestination("gilvanornelasff@gmail.com");
-        EmailProvider.send("goff.teste@gmail.com", "jjzdvui1!", email);
+    public void shallSendSimpleEmail() throws AddressException, MessagingException, GeneralSecurityException {
+        final Email email = new Email();
+        email.setDestination("gilvanornelasff@gmail.com");
+        EmailProvider.send("goff.teste@gmail.com", "", email);
     }
 
 }
