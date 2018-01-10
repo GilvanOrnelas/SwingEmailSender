@@ -1,11 +1,11 @@
-package com.goff.email_desktop.graphic.listener;
+package com.goff.email_desktop.graphic.email_manager.listener;
 
 import javax.swing.JList;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import com.goff.email_desktop.email.Email;
-import com.goff.email_desktop.graphic.PanelItem;
+import com.goff.email_desktop.graphic.email_manager.PanelItem;
 
 public class ItemSelectionListener implements ListSelectionListener {
 
@@ -22,6 +22,7 @@ public class ItemSelectionListener implements ListSelectionListener {
             final boolean oneItemIsSelected = panelItem.list.getSelectedIndex() != -1;
             if (oneItemIsSelected) {
                 panelItem.deleteButton.setEnabled(true);
+                panelItem.editButton.setEnabled(true);
                 panelItem.sendButton.setEnabled(true);
                 panelItem.sendAllButton.setEnabled(true);
                 final Email emailSelecionado = ((JList<Email>) e.getSource()).getSelectedValue();
@@ -29,6 +30,7 @@ public class ItemSelectionListener implements ListSelectionListener {
                 panelItem.emailBody.setEnabled(true);
             } else {
                 panelItem.deleteButton.setEnabled(false);
+                panelItem.editButton.setEnabled(false);
                 panelItem.sendButton.setEnabled(false);
                 panelItem.sendAllButton.setEnabled(false);
             }

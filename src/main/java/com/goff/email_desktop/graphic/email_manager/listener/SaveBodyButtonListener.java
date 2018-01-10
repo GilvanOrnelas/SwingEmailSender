@@ -1,9 +1,9 @@
-package com.goff.email_desktop.graphic.listener;
+package com.goff.email_desktop.graphic.email_manager.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.goff.email_desktop.graphic.PanelItem;
+import com.goff.email_desktop.graphic.email_manager.PanelItem;
 
 public class SaveBodyButtonListener implements ActionListener {
     private final PanelItem panelItem;

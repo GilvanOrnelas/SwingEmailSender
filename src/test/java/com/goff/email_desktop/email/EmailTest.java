@@ -1,19 +1,18 @@
 package com.goff.email_desktop.email;
 
-import java.security.GeneralSecurityException;
+import java.io.IOException;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.AddressException;
-
+import org.junit.Assert;
 import org.junit.Test;
 
 public class EmailTest {
 
     @Test
-    public void shallSendSimpleEmail() throws AddressException, MessagingException, GeneralSecurityException {
+    public void givenFileWithNameParameter_shallReplaceTheParameterWithActualName() throws IOException {
         final Email email = new Email();
-        email.setDestination("gilvanornelasff@gmail.com");
-        EmailProvider.send("goff.teste@gmail.com", "", email);
-    }
+        email.setName("Gilvan");
+        new EmailDefaultBodyTest().givenStringWithNameParameter_shallAddItToTheBodyFile();
 
+        Assert.assertEquals("Hello Gilvan!", email.loadDefaultBody());
+    }
 }

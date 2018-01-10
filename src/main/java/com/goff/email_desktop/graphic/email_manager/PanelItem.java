@@ -1,11 +1,10 @@
-package com.goff.email_desktop.graphic;
+package com.goff.email_desktop.graphic.email_manager;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JList;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 import com.goff.email_desktop.email.Email;
 
@@ -17,15 +16,17 @@ public class PanelItem {
 
     public JButton addButton;
 
+    public JButton editDefaultBodyButton;
+
     public JButton saveBodyButton;
 
     public JButton deleteButton;
 
+    public JButton editButton;
+
     public JButton sendButton;
 
     public JButton sendAllButton;
-
-    public JTextField inputField;
 
     public JTextArea emailBody;
 

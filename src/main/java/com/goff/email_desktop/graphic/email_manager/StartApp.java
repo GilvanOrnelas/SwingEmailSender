@@ -1,4 +1,4 @@
-package com.goff.email_desktop.graphic;
+package com.goff.email_desktop.graphic.email_manager;
 
 import java.awt.Dimension;
 
@@ -22,11 +22,11 @@ public class StartApp {
         final JFrame frame = new JFrame("E-mail manager");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        final JComponent newContentPane = new EmailManagerApp();
-        newContentPane.setOpaque(true); //content panes must be opaque
-        frame.setContentPane(newContentPane);
+        final JComponent contentPane = new EmailManagerApp();
+        contentPane.setOpaque(true);
+        frame.setContentPane(contentPane);
 
-        newContentPane.setMinimumSize(new Dimension(newContentPane.getPreferredSize().width, 100));
+        contentPane.setMinimumSize(new Dimension(contentPane.getPreferredSize().width, 100));
 
         frame.pack();
         frame.setVisible(true);
