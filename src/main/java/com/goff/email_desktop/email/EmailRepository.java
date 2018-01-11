@@ -15,7 +15,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class EmailRepository {
     static final String DEFAULT_BODY_DIR = System.getProperty("user.home") + "/.emailManager/";
-
+    public EmailRepository() {
+    	try {
+			Files.createDirectories(Paths.get(DEFAULT_BODY_DIR));
+		} catch (IOException e) {
+			throw new RuntimeException("Failed to create directory", e);
+		}
+	}
     public void save(final Email email) {
         final ObjectMapper mapper = new ObjectMapper();
         try {
@@ -89,8 +95,6 @@ public class EmailRepository {
     }
 
     private void writeJsonFile(final Email email, final String emailJson) throws IOException {
-
-        Files.createDirectories(Paths.get(DEFAULT_BODY_DIR));
         Files.write(Paths.get(DEFAULT_BODY_DIR + email.getDestination() + ".json"),
                 emailJson.getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE,
                 StandardOpenOption.TRUNCATE_EXISTING);

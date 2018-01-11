@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.security.GeneralSecurityException;
 import java.util.Enumeration;
+import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.swing.JFrame;
@@ -24,10 +25,13 @@ public class SendAllListener implements ActionListener {
     @Override
     public void actionPerformed(final ActionEvent e) {
         final Enumeration<Email> emails = panelItem.listModel.elements();
+        StringBuilder sb = new StringBuilder();
         while (emails.hasMoreElements()) {
             final Email email = emails.nextElement();
             sendEmail(email);
+            sb.append(email.getDestination() + "; ");
         }
+        JOptionPane.showMessageDialog(null, "E-mails sended to " + sb.toString(), "Success!", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void sendEmail(final Email email) {

@@ -13,7 +13,6 @@ public class EmailDefaultBody {
 
     public static void define(final String emailMessage) {
         try {
-
             Files.write(PATH_TO_DEFAULT_BODY_FILE, emailMessage.getBytes(StandardCharsets.UTF_8),
                     StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
         } catch (final IOException e) {
@@ -22,7 +21,10 @@ public class EmailDefaultBody {
     }
 
     public static String read() {
-        try {
+        if(!Files.exists(PATH_TO_DEFAULT_BODY_FILE)){
+        	return "";
+        }
+    	try {
             return new String(Files.readAllBytes(PATH_TO_DEFAULT_BODY_FILE), StandardCharsets.UTF_8);
         } catch (final IOException e) {
             throw new RuntimeException("Failed to read .emailDefaultBody.txt file.", e);

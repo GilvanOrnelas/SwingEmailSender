@@ -27,22 +27,24 @@ public class EmailProvider {
         final Message message = new MimeMessage(defaultSession);
         message.setFrom(new InternetAddress(userName));
         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email.getDestination()));
-        message.setSubject("Titulo Email Automatico");
-        message.setText("Funcionaaaa!!");
+        message.setSubject("Feedback do " + email.getName());
+        message.setText(email.getBody()); 
 
-        final Multipart multipart = createAttachment(email.getAttachment());
+        final Multipart multipart = createAttachment(email.getAttachment(), email.getBody());
         message.setContent(multipart);
-
+       
         Transport.send(message);
 
     }
 
-    private static Multipart createAttachment(final String filePath)
+    private static Multipart createAttachment(final String filePath, String messageBody)
             throws MessagingException {
         final BodyPart messageBodyPart = new MimeBodyPart();
         final DataSource source = new FileDataSource(filePath);
+        messageBodyPart.setText(messageBody);
         messageBodyPart.setDataHandler(new DataHandler(source));
-        messageBodyPart.setFileName(filePath.substring(filePath.lastIndexOf("/")));
+        messageBodyPart.setFileName(filePath.substring(filePath.lastIndexOf("\\")+1));
+        
         final Multipart multipart = new MimeMultipart();
         multipart.addBodyPart(messageBodyPart);
         return multipart;

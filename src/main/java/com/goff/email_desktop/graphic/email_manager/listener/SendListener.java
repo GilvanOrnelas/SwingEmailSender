@@ -25,6 +25,7 @@ public class SendListener implements ActionListener {
         final Email selectedEmail = list.getSelectedValue();
         try {
             EmailProvider.send(EmailUser.getEmail(), EmailUser.getPassword(), selectedEmail);
+            JOptionPane.showMessageDialog(null, "E-mail sended to " + selectedEmail.getDestination(), "Success!", JOptionPane.INFORMATION_MESSAGE);
         } catch (MessagingException | GeneralSecurityException e1) {
             JOptionPane.showMessageDialog(new JFrame("Error"), e1.getMessage(), "Error in e-mail sending",
                     JOptionPane.ERROR_MESSAGE);
