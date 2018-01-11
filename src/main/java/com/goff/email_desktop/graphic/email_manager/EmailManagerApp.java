@@ -79,6 +79,7 @@ public class EmailManagerApp extends JPanel {
         panelItem.list = new JList<>(panelItem.listModel);
         panelItem.list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         panelItem.list.addListSelectionListener(new ItemSelectionListener(panelItem));
+        panelItem.list.setCellRenderer(new ListColorController());
 
     }
 

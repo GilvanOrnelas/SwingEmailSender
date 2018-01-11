@@ -8,7 +8,8 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
 public class EmailDefaultBody {
-    static final String DEFAULT_BODY_FILE = System.getProperty("user.home") + "/.emailDefaultBody.txt";
+    static final String DEFAULT_BODY_FILE =
+            System.getProperty("user.home") + "/.emailManager/.emailDefaultBody.txt";
     private static final Path PATH_TO_DEFAULT_BODY_FILE = Paths.get(DEFAULT_BODY_FILE);
 
     public static void define(final String emailMessage) {
@@ -21,10 +22,10 @@ public class EmailDefaultBody {
     }
 
     public static String read() {
-        if(!Files.exists(PATH_TO_DEFAULT_BODY_FILE)){
-        	return "";
+        if (!Files.exists(PATH_TO_DEFAULT_BODY_FILE)) {
+            return "";
         }
-    	try {
+        try {
             return new String(Files.readAllBytes(PATH_TO_DEFAULT_BODY_FILE), StandardCharsets.UTF_8);
         } catch (final IOException e) {
             throw new RuntimeException("Failed to read .emailDefaultBody.txt file.", e);

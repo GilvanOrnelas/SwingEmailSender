@@ -11,6 +11,8 @@ public class Email {
     private String body;
     private String attachment;
     private String name;
+    private boolean sended;
+    private boolean withSendingError;
 
     public String loadDefaultBody() {
         final String defaultBody = EmailDefaultBody.read();
@@ -20,6 +22,12 @@ public class Email {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder(destination).append(" (").append(attachment).append(')');
+        if (withSendingError) {
+            sb.append(" - Error");
+        }
+        if (sended) {
+            sb.append(" - Sended");
+        }
         return sb.toString();
     }
 
@@ -77,6 +85,22 @@ public class Email {
 
     public void setName(final String name) {
         this.name = name;
+    }
+
+    public boolean isSended() {
+        return sended;
+    }
+
+    public void setSended(final boolean sended) {
+        this.sended = sended;
+    }
+
+    public boolean isWithSendingError() {
+        return withSendingError;
+    }
+
+    public void setWithSendingError(final boolean withSendingError) {
+        this.withSendingError = withSendingError;
     }
 
 }

@@ -19,7 +19,7 @@ import javax.mail.internet.MimeMultipart;
 
 public class EmailProvider {
 
-    public static void send(final String userName, final String password, Email email)
+    public static void send(final String userName, final String password, final Email email)
             throws AddressException, MessagingException, GeneralSecurityException {
 
         final Session defaultSession = ConfigurationSession.createDefaultSession(userName, password);
@@ -28,23 +28,26 @@ public class EmailProvider {
         message.setFrom(new InternetAddress(userName));
         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email.getDestination()));
         message.setSubject("Feedback do " + email.getName());
-        message.setText(email.getBody()); 
+        message.setText(email.getBody());
 
         final Multipart multipart = createAttachment(email.getAttachment(), email.getBody());
         message.setContent(multipart);
-       
-        Transport.send(message);
 
+        email.setSended(false);
+        email.setWithSendingError(true);
+        Transport.send(message);
+        email.setSended(true);
+        email.setWithSendingError(false);
     }
 
-    private static Multipart createAttachment(final String filePath, String messageBody)
+    private static Multipart createAttachment(final String filePath, final String messageBody)
             throws MessagingException {
         final BodyPart messageBodyPart = new MimeBodyPart();
         final DataSource source = new FileDataSource(filePath);
         messageBodyPart.setText(messageBody);
         messageBodyPart.setDataHandler(new DataHandler(source));
-        messageBodyPart.setFileName(filePath.substring(filePath.lastIndexOf("\\")+1));
-        
+        messageBodyPart.setFileName(filePath.substring(filePath.lastIndexOf("\\") + 1));
+
         final Multipart multipart = new MimeMultipart();
         multipart.addBodyPart(messageBodyPart);
         return multipart;

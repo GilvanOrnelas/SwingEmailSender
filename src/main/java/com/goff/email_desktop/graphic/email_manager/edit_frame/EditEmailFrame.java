@@ -52,6 +52,8 @@ public class EditEmailFrame extends JFrame implements ActionListener {
             email.setAttachment(FileChooser.chooseFileAbsolutePath());
         } else if (source == saveAndCloseButton) {
             email.setBody(body.getText());
+            email.setWithSendingError(false);
+            email.setSended(false);
             new EmailRepository().save(email);
             panelItem.emailBody.setText(body.getText());
             this.dispose();
